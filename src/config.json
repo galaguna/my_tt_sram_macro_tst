@@ -101,8 +101,6 @@
 	"GND_NETS": "vssd1",
   "//":"FP_PDN_MACRO_HOOKS",
   "PDN_MACRO_CONNECTIONS": "sram0 vccd1 vssd1 vccd1 vssd1",
-	"//":"SYNTH_POWER_DEFINE",
-  "VERILOG_POWER_DEFINE":"USE_POWER_PINS",
 
 
   "//": "  Config",
