@@ -17,7 +17,7 @@
 
   "//": "CLOCK_PERIOD - Increase this in case you are getting setup time violations.",
   "//": "The value is in nanoseconds, so 20ns == 50MHz.",
-  "CLOCK_PERIOD": 20,
+  "CLOCK_PERIOD": 50,
 
   "//": "Hold slack margin - Increase them in case you are getting hold violations.",
   "PL_RESIZER_HOLD_SLACK_MARGIN": 0.1,
@@ -26,12 +26,14 @@
   "//": "RUN_LINTER, LINTER_INCLUDE_PDK_MODELS - Disabling the linter is not recommended!",
   "RUN_LINTER": 1,
   "LINTER_INCLUDE_PDK_MODELS": 1,
+  "QUIT_ON_SYNTH_CHECKS": 0,
+  "QUIT_ON_VERILATOR_ERRORS": 0,
 
   "//": "If you need a custom clock configuration, read the following documentation first:",
   "//": "https://tinytapeout.com/faq/#how-can-i-map-an-additional-external-clock-to-one-of-the-gpios",
   "CLOCK_PORT": "clk",
 
-  "//": "Configuration docs: https://librelane.readthedocs.io/en/latest/reference/configuration.html",
+  "//": "Configuration docs: https://openlane.readthedocs.io/en/latest/reference/configuration.html",
 
   "//": "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!",
   "//": "!!! DO NOT CHANGE ANYTHING BELOW THIS POINT !!!",
@@ -63,12 +65,58 @@
   "//": "Clock",
   "RUN_CTS": 1,
 
-  "//": "Don't generate power rings",
+  "//": "Don't use power rings or met5 layer",
   "FP_PDN_MULTILAYER": 0,
+  "RT_MAX_LAYER": "met4",
 
   "//": "MAGIC_DEF_LABELS may cause issues with LVS",
   "MAGIC_DEF_LABELS": 0,
 
   "//": "Only export pin area in LEF (without any connected nets)",
-  "MAGIC_WRITE_LEF_PINONLY": 1
+  "MAGIC_WRITE_LEF_PINONLY": 1,
+
+  "//": "Macro",
+	"MACROS": {
+		"sky130_sram_1kbyte_1rw1r_32x256_8": {
+		  "instances": {
+			"sram0": {
+			  "location": [16, 16],
+			  "orientation": "N"
+			}
+		  },
+		  "gds": ["dir::macro/sky130_sram_1kbyte_1rw1r_32x256_8.gds"],
+		  "lef": ["dir::macro/sky130_sram_1kbyte_1rw1r_32x256_8.lef"],
+      "lib": {
+        "*": ["dir::macro/sky130_sram_1kbyte_1rw1r_32x256_8_TT_1p8V_25C.lib"]
+      }
+		}
+	},
+
+
+  "//": "Macro power",
+  "VDD_NETS": "VDPWR",
+	"GND_NETS": "VGND",
+  "FP_PDN_MACRO_HOOKS": "sram_ins VDPWR VGND vccd1 vssd1",
+	"SYNTH_POWER_DEFINE": "USE_POWER_PINS",
+
+  "//": "  Disable IR Drop report, useless anyway",
+  "RUN_IRDROP_REPORT":0,
+
+  "//": "  Have magic consider nets of same name to be connected since our power pads are not all internally connected",
+  "MAGIC_NO_EXT_UNIQUE":1,
+
+  "//": "  All met4 stripes are not connected internally, this causes PDN to crap out ...",
+  "ERROR_ON_PDN_VIOLATIONS":0,
+
+  "//": "  Config",
+	"FP_PDN_CHECK_NODES": 0,
+	"FP_PDN_VOFFSET": 26.32,
+	"RUN_MAGIC_WRITE_LEF": 1,
+	"MAGIC_LEF_WRITE_USE_GDS": 0,
+	"MAGIC_CAPTURE_ERRORS": 0,
+	"MAGIC_DRC_USE_GDS": 1,
+	"QUIT_ON_MAGIC_DRC": 0,
+	"QUIT_ON_KLAYOUT_DRC": 0,
+	"SYNTH_ABC_BUFFERING": 1,
+	"RUN_HEURISTIC_DIODE_INSERTION": 1
 }
