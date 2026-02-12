@@ -1,11 +1,12 @@
 /*
- * Copyright (c) 2024 Your Name
+ * Copyright (c) 2025 Gerardo Laguna-Sanchez
  * SPDX-License-Identifier: Apache-2.0
  */
 
 `default_nettype none
 
-module tt_um_example (
+
+module tt_um_galaguna_sram_tst (
     input  wire [7:0] ui_in,    // Dedicated inputs
     output wire [7:0] uo_out,   // Dedicated outputs
     input  wire [7:0] uio_in,   // IOs: Input path
@@ -15,13 +16,59 @@ module tt_um_example (
     input  wire       clk,      // clock
     input  wire       rst_n     // reset_n - low to reset
 );
+ 
+    //signals:
+reg [31:0] dataout_stored;
+reg cs_int;
+wire [31:0] dataout_int;
+wire [31:0] dout;
+wire cs,we;    
+wire [31:0] datain;
+wire [7:0] addr;
+wire [3:0] write_allow;
 
-  // All output pins must be assigned. If not used, assign to 0.
-  assign uo_out  = ui_in + uio_in;  // Example: ou_out is the sum of ui_in and uio_in
-  assign uio_out = 0;
-  assign uio_oe  = 0;
 
+always @(posedge clk) begin
+    if(!rst_n) begin
+        cs_int <= 1;
+        dataout_stored <= 0;
+    end else begin
+        if(cs)
+            dataout_stored <= dataout_int;
+        cs_int <= cs;
+    end
+end
+
+    //instantiations:
+    
+sky130_sram_1kbyte_1rw1r_32x256_8 sram0(
+    .clk0(clk),
+    .csb0(!cs),
+    .web0(!we),
+    .wmask0(write_allow),
+    .addr0(addr),
+    .din0(datain),
+    .dout0(dataout_int),
+
+    .clk1(1'b0),
+    .csb1(1'b1),
+    .addr1(8'b00000000),
+    .dout1()
+);
+    
+  // interconnection logic:
+	assign cs      = uio_in[0];
+	assign we      = uio_in[1];
+	assign addr    = 8'b00000000;
+	assign write_allow =4'b0001;
+    assign datain  = {24'b000000000000000000000000,ui_in};
+
+  //output logic
+    assign uio_oe  = 8'b11111100;
+	assign uo_out = cs_int ? dataout_int[7:0] : dataout_stored[7:0];
+    
   // List all unused inputs to prevent warnings
-  wire _unused = &{ena, clk, rst_n, 1'b0};
+  wire _unused = &{ena, uio_in[2], uio_in[3], uio_in[4], uio_in[5], uio_in[6], uio_in[7], 1'b0};
 
 endmodule
+    
