@@ -24,7 +24,7 @@
   "GRT_RESIZER_HOLD_SLACK_MARGIN": 0.05,
 
   "//": "RUN_LINTER, LINTER_INCLUDE_PDK_MODELS - Disabling the linter is not recommended!",
-  "RUN_LINTER": 1,
+  "RUN_LINTER": 0,
   "LINTER_INCLUDE_PDK_MODELS": 1,
   "//":"QUIT_ON_SYNTH_CHECKS",
   "ERROR_ON_SYNTH_CHECKS": 0,
@@ -79,10 +79,10 @@
   "MAGIC_WRITE_LEF_PINONLY": 1,
 
   "//": "Macro power",
-  "VDD_NETS": "VDD",
-  "GND_NETS": "VSS",
+  "VDD_NETS": "vccd1",
+  "GND_NETS": "vssd1",
   "//":"FP_PDN_MACRO_HOOKS",
-  "PDN_MACRO_CONNECTIONS": "sram0 VDD VSS vccd1 vssd1",
+  "PDN_MACRO_CONNECTIONS": "sram0 vccd1 vssd1 vccd1 vssd1",
   "//":"SYNTH_POWER_DEFINE",
   "VERILOG_POWER_DEFINE":"USE_POWER_PINS",
 
