@@ -97,12 +97,13 @@
 
 
   "//": "Macro power",
-  "VDD_NETS": "VDPWR",
-	"GND_NETS": "VGND",
+  "VDD_NETS": "vccd1",
+	"GND_NETS": "vssd1",
   "//":"FP_PDN_MACRO_HOOKS",
-  "PDN_MACRO_CONNECTIONS": "sram0 VDPWR VGND vccd1 vssd1",
+  "PDN_MACRO_CONNECTIONS": "sram0 vccd1 vssd1 vccd1 vssd1",
 	"//":"SYNTH_POWER_DEFINE",
-  "VERILOG_POWER_DEFINE": "USE_POWER_PINS",
+  "//":"VERILOG_POWER_DEFINE",
+  "//": "USE_POWER_PINS",
 
   "//": "  Disable IR Drop report, useless anyway",
   "RUN_IRDROP_REPORT":0,
