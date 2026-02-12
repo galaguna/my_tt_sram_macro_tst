@@ -27,7 +27,8 @@
   "RUN_LINTER": 1,
   "LINTER_INCLUDE_PDK_MODELS": 1,
   "QUIT_ON_SYNTH_CHECKS": 0,
-  "QUIT_ON_VERILATOR_ERRORS": 0,
+  "//": "QUIT_ON_VERILATOR_ERRORS",
+  "ERROR_ON_LINTER_ERRORS": 0,
 
   "//": "If you need a custom clock configuration, read the following documentation first:",
   "//": "https://tinytapeout.com/faq/#how-can-i-map-an-additional-external-clock-to-one-of-the-gpios",
@@ -96,8 +97,10 @@
   "//": "Macro power",
   "VDD_NETS": "VDPWR",
 	"GND_NETS": "VGND",
-  "FP_PDN_MACRO_HOOKS": "sram_ins VDPWR VGND vccd1 vssd1",
-	"SYNTH_POWER_DEFINE": "USE_POWER_PINS",
+  "//":"FP_PDN_MACRO_HOOKS",
+  "PDN_MACRO_CONNECTIONS": "sram_ins VDPWR VGND vccd1 vssd1",
+	"//":"SYNTH_POWER_DEFINE",
+  "VERILOG_POWER_DEFINE": "USE_POWER_PINS",
 
   "//": "  Disable IR Drop report, useless anyway",
   "RUN_IRDROP_REPORT":0,
@@ -109,14 +112,15 @@
   "ERROR_ON_PDN_VIOLATIONS":0,
 
   "//": "  Config",
-	"FP_PDN_CHECK_NODES": 0,
 	"FP_PDN_VOFFSET": 26.32,
 	"RUN_MAGIC_WRITE_LEF": 1,
 	"MAGIC_LEF_WRITE_USE_GDS": 0,
 	"MAGIC_CAPTURE_ERRORS": 0,
 	"MAGIC_DRC_USE_GDS": 1,
-	"QUIT_ON_MAGIC_DRC": 0,
-	"QUIT_ON_KLAYOUT_DRC": 0,
+	"//":"QUIT_ON_MAGIC_DRC",
+  "ERROR_ON_MAGIC_DRC": 0,
+	"//":"QUIT_ON_KLAYOUT_DRC",
+  "ERROR_ON_KLAYOUT_DRC": 0,
 	"SYNTH_ABC_BUFFERING": 1,
 	"RUN_HEURISTIC_DIODE_INSERTION": 1
 }
