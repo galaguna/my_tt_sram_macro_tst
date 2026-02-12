@@ -78,6 +78,14 @@
   "//": "Only export pin area in LEF (without any connected nets)",
   "MAGIC_WRITE_LEF_PINONLY": 1,
 
+  "//": "Macro power",
+  "VDD_NETS": "VDPWR",
+  "GND_NETS": "VGND",
+  "//":"FP_PDN_MACRO_HOOKS",
+  "PDN_MACRO_CONNECTIONS": "sram0 VDPWR VGND vccd1 vssd1",
+  "//":"SYNTH_POWER_DEFINE",
+  "VERILOG_POWER_DEFINE":"USE_POWER_PINS",
+
   "//": "Macro",
 	"MACROS": {
 		"sky130_sram_1kbyte_1rw1r_32x256_8": {
@@ -96,18 +104,8 @@
 	},
 
 
-  "//": "Macro power",
-  "VDD_NETS": "vccd1",
-	"GND_NETS": "vssd1",
-  "//":"FP_PDN_MACRO_HOOKS",
-  "PDN_MACRO_CONNECTIONS": "sram0 vccd1 vssd1 vccd1 vssd1",
-  "//":"SYNTH_POWER_DEFINE",
-  "VERILOG_POWER_DEFINE":"USE_POWER_PINS",
-
 
   "//": "  Config",
-  "FP_MACRO_HORIZONTAL_HALO": "6",
-  "FP_MACRO_VERTICAL_HALO": "1",
 	"FP_PDN_VOFFSET": 26.32,
 	"RUN_MAGIC_WRITE_LEF": 1,
 	"MAGIC_LEF_WRITE_USE_GDS": 0,
