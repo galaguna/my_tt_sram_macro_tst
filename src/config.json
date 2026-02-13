@@ -96,7 +96,10 @@
 			}
 		  },
 		  "gds": ["dir::macro/sky130_sram_1kbyte_1rw1r_32x256_8.gds"],
-		  "lef": ["dir::macro/sky130_sram_1kbyte_1rw1r_32x256_8.lef"]
+		  "lef": ["dir::macro/sky130_sram_1kbyte_1rw1r_32x256_8.lef"],
+          "lib": {
+        	"*": ["dir::macro/sky130_sram_1kbyte_1rw1r_32x256_8_TT_1p8V_25C.lib"]
+          }
 		}
 	},
 
