@@ -91,7 +91,7 @@
 		"sky130_sram_1kbyte_1rw1r_32x256_8": {
 		  "instances": {
 			"sram0": {
-			  "location": [16, 16],
+			  "location": [100, 16],
 			  "orientation": "N"
 			}
 		  },
@@ -106,7 +106,9 @@
 
 
   "//": "  Config",
-	"FP_PDN_VOFFSET": 26.32,
+    "FP_PDN_CHECK_NODES": false,
+    "FP_PDN_VOFFSET": 26.32,
+    "FP_PDN_CFG": "dir::../pdn_cfg.tcl",
 	"RUN_MAGIC_WRITE_LEF": 1,
 	"MAGIC_LEF_WRITE_USE_GDS": 0,
 	"MAGIC_CAPTURE_ERRORS": 0,
